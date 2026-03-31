@@ -3,7 +3,7 @@ module dff(
     input [31:0] din, 
     input clk, we, rst,
     output reg [31:0] q, 
-    output [32:0] qbar
+    output [31:0] qbar
 );
 always @(posedge clk) begin
     if (rst) begin
