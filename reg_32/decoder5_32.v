@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 module dec5_31(
-    input [4:0] din,
+    input [4:0] dec_in,
     output [31:0] addr
 );
 /*always @(*) begin
@@ -8,5 +8,5 @@ module dec5_31(
     addr[din] = 1'b1
 end*/
 
-assign addr = (1 << din); // shifts '1' to the left by din positions
+assign addr = (1 << dec_in); // shifts '1' to the left by din positions
 endmodule
