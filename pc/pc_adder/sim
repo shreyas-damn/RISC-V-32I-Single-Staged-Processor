@@ -1,0 +1,57 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x131604290 .scope module, "pc_adder_tb" "pc_adder_tb" 2 2;
+ .timescale -9 -12;
+v0x600000914360_0 .var "pc_current", 31 0;
+v0x6000009143f0_0 .var "pc_imm", 31 0;
+v0x600000914480_0 .net "pc_target", 31 0, L_0x600000a14000;  1 drivers
+S_0x131604400 .scope module, "UUT" "pc_adder" 2 7, 3 2 0, S_0x131604290;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 32 "pc_current";
+    .port_info 1 /INPUT 32 "pc_imm";
+    .port_info 2 /OUTPUT 32 "pc_target";
+v0x6000009141b0_0 .net "pc_current", 31 0, v0x600000914360_0;  1 drivers
+v0x600000914240_0 .net "pc_imm", 31 0, v0x6000009143f0_0;  1 drivers
+v0x6000009142d0_0 .net "pc_target", 31 0, L_0x600000a14000;  alias, 1 drivers
+L_0x600000a14000 .arith/sum 32, v0x600000914360_0, v0x6000009143f0_0;
+    .scope S_0x131604290;
+T_0 ;
+    %vpi_call 2 14 "$dumpfile", "sim.vcd" {0 0 0};
+    %vpi_call 2 15 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x131604290 {0 0 0};
+    %vpi_call 2 16 "$monitor", "Time = %t | pc_current = %b | pc_imm = %b | pc_target = %b", $time, v0x600000914360_0, v0x6000009143f0_0, v0x600000914480_0 {0 0 0};
+    %pushi/vec4 4096, 0, 32;
+    %store/vec4 v0x600000914360_0, 0, 32;
+    %pushi/vec4 8, 0, 32;
+    %store/vec4 v0x6000009143f0_0, 0, 32;
+    %delay 10000, 0;
+    %pushi/vec4 4096, 0, 32;
+    %store/vec4 v0x600000914360_0, 0, 32;
+    %pushi/vec4 240, 0, 32;
+    %store/vec4 v0x6000009143f0_0, 0, 32;
+    %delay 10000, 0;
+    %pushi/vec4 4128, 0, 32;
+    %store/vec4 v0x600000914360_0, 0, 32;
+    %pushi/vec4 4294967264, 0, 32;
+    %store/vec4 v0x6000009143f0_0, 0, 32;
+    %delay 10000, 0;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x600000914360_0, 0, 32;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x6000009143f0_0, 0, 32;
+    %delay 10000, 0;
+    %vpi_call 2 33 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "pc_adder_tb.v";
+    "pc_adder.v";

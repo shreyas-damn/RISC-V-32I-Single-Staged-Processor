@@ -1,0 +1,52 @@
+$date
+	Fri Apr 10 21:25:40 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module pc_adder_tb $end
+$var wire 32 ! pc_target [31:0] $end
+$var reg 32 " pc_current [31:0] $end
+$var reg 32 # pc_imm [31:0] $end
+$scope module UUT $end
+$var wire 32 $ pc_current [31:0] $end
+$var wire 32 % pc_imm [31:0] $end
+$var wire 32 & pc_target [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b1000000001000 &
+b1000 %
+b1000000000000 $
+b1000 #
+b1000000000000 "
+b1000000001000 !
+$end
+#10000
+b1000011110000 !
+b1000011110000 &
+b11110000 #
+b11110000 %
+#20000
+b11111111111111111111111111100000 #
+b11111111111111111111111111100000 %
+b1000000000000 !
+b1000000000000 &
+b1000000100000 "
+b1000000100000 $
+#30000
+b0 #
+b0 %
+b0 !
+b0 &
+b0 "
+b0 $
+#40000
