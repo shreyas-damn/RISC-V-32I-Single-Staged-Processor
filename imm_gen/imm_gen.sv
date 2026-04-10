@@ -2,7 +2,7 @@
 module imm_gen(
     input [31:0] inst,                   //instruction given
     input [2:0] imm_sel,                 //select which type of instruction
-    output reg [31:0] imm_out                 //extimm output extended immediate
+    output reg [31:0] imm_out            //extimm output extended immediate
 );
 
 always @(*) begin
