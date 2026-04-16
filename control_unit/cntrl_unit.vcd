@@ -1,0 +1,233 @@
+$date
+	Thu Apr 16 11:06:04 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module cntrl_unit_tb $end
+$var wire 2 ! wb_sel [1:0] $end
+$var wire 1 " reg_write $end
+$var wire 1 # mem_write $end
+$var wire 1 $ mem_read $end
+$var wire 1 % jump $end
+$var wire 3 & imm_sel [2:0] $end
+$var wire 1 ' branch $end
+$var wire 1 ( alu_src $end
+$var wire 4 ) alu_ctrl [3:0] $end
+$var reg 1 * carry $end
+$var reg 1 + clk $end
+$var reg 32 , instr [31:0] $end
+$var reg 1 - negative $end
+$var reg 1 . overflow $end
+$var reg 1 / rst $end
+$var reg 1 0 zero $end
+$scope module dut $end
+$var wire 1 * carry $end
+$var wire 1 + clk $end
+$var wire 32 1 instr [31:0] $end
+$var wire 1 - negative $end
+$var wire 1 . overflow $end
+$var wire 1 / rst $end
+$var wire 1 0 zero $end
+$var wire 7 2 opcode [6:0] $end
+$var wire 7 3 funct7 [6:0] $end
+$var wire 3 4 funct3 [2:0] $end
+$var reg 4 5 alu_ctrl [3:0] $end
+$var reg 1 ( alu_src $end
+$var reg 1 ' branch $end
+$var reg 3 6 imm_sel [2:0] $end
+$var reg 1 % jump $end
+$var reg 1 $ mem_read $end
+$var reg 1 # mem_write $end
+$var reg 1 " reg_write $end
+$var reg 2 7 wb_sel [1:0] $end
+$upscope $end
+$scope task apply_instr $end
+$var reg 32 8 inst [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx 8
+b0 7
+b0 6
+b0 5
+b0 4
+b0 3
+b0 2
+b0 1
+00
+1/
+0.
+0-
+b0 ,
+0+
+0*
+b0 )
+0(
+0'
+b0 &
+0%
+0$
+0#
+0"
+b0 !
+$end
+#5000
+1+
+#10000
+1"
+b110011 2
+0+
+b110011 ,
+b110011 1
+b110011 8
+0/
+#15000
+1+
+#20000
+b1 )
+b1 5
+1"
+b100000 3
+0+
+b1000000000000000000000000110011 ,
+b1000000000000000000000000110011 1
+b1000000000000000000000000110011 8
+#25000
+1+
+#30000
+1"
+b10 )
+b10 5
+b111 4
+b0 3
+0+
+b111000000110011 ,
+b111000000110011 1
+b111000000110011 8
+#35000
+1+
+#40000
+1(
+1"
+b0 )
+b0 5
+b0 4
+b10011 2
+0+
+b100000000000000010011 ,
+b100000000000000010011 1
+b100000000000000010011 8
+#45000
+1+
+#50000
+b1 !
+b1 7
+1$
+1(
+1"
+b10 4
+b11 2
+0+
+b100000010000000000011 ,
+b100000010000000000011 1
+b100000010000000000011 8
+#55000
+1+
+#60000
+b1 &
+b1 6
+1#
+b0 !
+b0 7
+1(
+0$
+0"
+b100011 2
+0+
+b10000000100011 ,
+b10000000100011 1
+b10000000100011 8
+#65000
+1+
+#70000
+b1 )
+b1 5
+1'
+b10 &
+b10 6
+0(
+0#
+b0 4
+b1100011 2
+0+
+b1100011 ,
+b1100011 1
+b1100011 8
+10
+#75000
+1+
+#80000
+b11 !
+b11 7
+1"
+b11 &
+b11 6
+0'
+b0 )
+b0 5
+b110111 2
+0+
+b110111 ,
+b110111 1
+b110111 8
+00
+#85000
+1+
+#90000
+1(
+b11 &
+b11 6
+b0 !
+b0 7
+1"
+b10111 2
+0+
+b10111 ,
+b10111 1
+b10111 8
+#95000
+1+
+#100000
+b10 !
+b10 7
+1%
+b100 &
+b100 6
+0(
+1"
+b1101111 2
+0+
+b1101111 ,
+b1101111 1
+b1101111 8
+#105000
+1+
+#110000
+0+
+#115000
+1+
+#120000
+0+
+#125000
+1+
+#130000
+0+
