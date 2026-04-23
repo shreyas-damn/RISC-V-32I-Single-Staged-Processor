@@ -2,87 +2,91 @@
 
 module cntrl_unit_tb;
 
-reg [31:0] instr;
-reg zero;
-reg negative;
-reg carry;
-reg overflow;
-reg rst;
-reg clk;
+    reg  [31:0] instr;
+    reg         zero;
+    reg         rst;
+    reg         clk;
 
-wire [3:0] alu_ctrl;
-wire reg_write;
-wire mem_read;
-wire mem_write;
-wire alu_src;
-wire branch;
-wire jump;
-wire [1:0] wb_sel;
-wire [2:0] imm_sel;
+    wire [3:0]  alu_ctrl;
+    wire        reg_write;
+    wire        mem_read;
+    wire        mem_write;
+    wire        alu_src;
+    wire [1:0]  pc_sel;
+    wire [1:0]  wb_sel;
+    wire [2:0]  imm_sel;
 
-cntrl_unit dut (
-    .instr(instr),
-    .zero(zero),
-    .negative(negative),
-    .carry(carry),
-    .overflow(overflow),
-    .rst(rst),
-    .clk(clk),
-    .alu_ctrl(alu_ctrl),
-    .reg_write(reg_write),
-    .mem_read(mem_read),
-    .mem_write(mem_write),
-    .alu_src(alu_src),
-    .branch(branch),
-    .jump(jump),
-    .wb_sel(wb_sel),
-    .imm_sel(imm_sel)
-);
+    // DUT
+    cntrl_unit DUT (
+        .instr(instr),
+        .zero(zero),
+        .rst(rst),
+        .clk(clk),
+        .alu_ctrl(alu_ctrl),
+        .reg_write(reg_write),
+        .mem_read(mem_read),
+        .mem_write(mem_write),
+        .alu_src(alu_src),
+        .pc_sel(pc_sel),
+        .wb_sel(wb_sel),
+        .imm_sel(imm_sel)
+    );
 
-always #5 clk = ~clk;
+    // clock (not really needed but kept for structure consistency)
+    always #5 clk = ~clk;
 
-task apply_instr(input [31:0] inst);
-begin
-    instr = inst;
-    #10;
-end
-endtask
+    initial begin
+        clk = 0;
+        rst = 1;
+        zero = 0;
 
-initial begin
-    $dumpfile("cntrl_unit.vcd");
-    $dumpvars(0, cntrl_unit_tb);
+        #10 rst = 0;
 
-    clk = 0;
-    rst = 1;
-    instr = 0;
-    zero = 0;
-    negative = 0;
-    carry = 0;
-    overflow = 0;
+        $display("\n--- CONTROL UNIT TEST START ---\n");
 
-    #10 rst = 0;
+        // ---------------- R-TYPE ADD ----------------
+        instr = 32'b0000000_00010_00001_000_00011_0110011;
+        #10;
+        $display("R-TYPE ADD: alu_ctrl=%b reg_write=%b", alu_ctrl, reg_write);
 
-    apply_instr(32'b0000000_00000_00000_000_00000_0110011);
-    apply_instr(32'b0100000_00000_00000_000_00000_0110011);
-    apply_instr(32'b0000000_00000_00000_111_00000_0110011);
+        // ---------------- R-TYPE SUB ----------------
+        instr = 32'b0100000_00010_00001_000_00011_0110011;
+        #10;
+        $display("R-TYPE SUB: alu_ctrl=%b", alu_ctrl);
 
-    apply_instr(32'b000000000001_00000_000_00000_0010011);
+        // ---------------- I-TYPE ADDI ----------------
+        instr = 32'b000000000100_00001_000_00010_0010011;
+        #10;
+        $display("ADDI: alu_ctrl=%b alu_src=%b", alu_ctrl, alu_src);
 
-    apply_instr(32'b000000000001_00000_010_00000_0000011);
+        // ---------------- LOAD (LW) ----------------
+        instr = 32'b000000000100_00001_010_00010_0000011;
+        #10;
+        $display("LW: mem_read=%b wb_sel=%b", mem_read, wb_sel);
 
-    apply_instr(32'b0000000_00000_00000_010_00000_0100011);
+        // ---------------- STORE (SW) ----------------
+        instr = 32'b0000000_00010_00001_010_00100_0100011;
+        #10;
+        $display("SW: mem_write=%b alu_src=%b", mem_write, alu_src);
 
-    zero = 1;
-    apply_instr(32'b0000000_00000_00000_000_00000_1100011);
-    zero = 0;
+        // ---------------- BRANCH (BEQ) ----------------
+        zero = 1;
+        instr = 32'b0000000_00010_00001_000_00000_1100011;
+        #10;
+        $display("BEQ: pc_sel=%b (zero=%b)", pc_sel, zero);
 
-    apply_instr(32'b00000000000000000000_00000_0110111);
-    apply_instr(32'b00000000000000000000_00000_0010111);
+        // ---------------- JAL ----------------
+        instr = 32'b00000000000100000000_00000_1101111;
+        #10;
+        $display("JAL: wb_sel=%b pc_sel=%b", wb_sel, pc_sel);
 
-    apply_instr(32'b00000000000000000000_00000_1101111);
+        // ---------------- JALR ----------------
+        instr = 32'b000000000000_00001_000_00010_1100111;
+        #10;
+        $display("JALR: pc_sel=%b alu_src=%b", pc_sel, alu_src);
 
-    #20;
-    $finish;
-end
+        $display("\n--- TEST COMPLETE ---");
+        $finish;
+    end
 
 endmodule
