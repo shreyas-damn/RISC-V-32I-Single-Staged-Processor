@@ -1,2 +1,0 @@
-iverilog -g2012 -o sim regfile.sv regfile_tb.sv decoder5_32.v dff.v mux32.sv
-
