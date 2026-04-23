@@ -20,7 +20,7 @@ always @(*) begin
             imm_out = {inst[31:12], 12'b0};
         end
         3'b100 : begin 
-            imm_out = {{11{inst[31]}}, inst[31], inst[19:12], inst[20], inst[30:21], 1'b0};
+            imm_out = {{12{inst[31]}}, inst[31], inst[19:12], inst[20], inst[30:21], 1'b0};
         end
         default : imm_out = 32'b0;
     endcase
